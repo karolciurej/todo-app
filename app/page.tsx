@@ -1,29 +1,21 @@
-"use client"
-import Image from "next/image";
-import prisma from "@/lib/prisma";
-import { GetStaticProps } from "next";
-import { useEffect, useState } from "react";
+"use client";
+import { useSession } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
 
 export default function Home() {
-  const [users, setUsers] = useState([]);
+  const router = useRouter();
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('/api');
-      // console.log(data)
-      console.log('data')
-      const data = await response.json();
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/signin");
+    },
+  });
+  console.log(session);
 
-      setUsers(data);
-    }
-
-    fetchData();
-  }, []);
   return (
-    <div>
-      {users.map((user: any)  => (
-        <p key={user.id}>{user.name}</p>
-      ))}
-    </div>
+    <>
+      <div>ASD</div>
+    </>
   );
 }
