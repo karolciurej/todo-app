@@ -3,25 +3,30 @@ import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { signIn } from "next-auth/react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 function SignIn() {
   const router = useRouter();
-
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+  const MySwal = withReactContent(Swal);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    console.log("123");
     const res = await signIn("credentials", {
       email: userInfo.email,
       password: userInfo.password,
       redirect: false,
     });
     if (!res?.error) {
-      console.log(res);
       router.push("/");
+      return
     }
-    console.log(res);
+    MySwal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Invalid email or password!",
+    });
   };
 
   return (
