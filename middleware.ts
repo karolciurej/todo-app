@@ -16,9 +16,8 @@ export function middleware(request: NextRequest) {
   if (publicPaths.includes(pathname)) {
     return NextResponse.next();
   }
-
   return NextResponse.redirect(new URL("/dashboard", request.url));
 }
 export const config = {
   matcher: ["/", "/login", "/register", "/dashboard/:path*"],
-}
+};

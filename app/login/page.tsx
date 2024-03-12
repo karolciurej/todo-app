@@ -1,51 +1,15 @@
 "use client";
-import { FormEventHandler, useState } from "react";
-import { useRouter } from "next/navigation";
 import React from "react";
-import { signIn } from "next-auth/react";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import LoginForm from "../components/LoginForm";
 
 function SignIn() {
-  const router = useRouter();
-  const [userInfo, setUserInfo] = useState({ email: "", password: "" });
-  const MySwal = withReactContent(Swal);
-
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault();
-    const res = await signIn("credentials", {
-      email: userInfo.email,
-      password: userInfo.password,
-      redirect: false,
-    });
-    if (!res?.error) {
-      router.push("/");
-      return
-    }
-    MySwal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: "Invalid email or password!",
-    });
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="email"
-        onChange={({ target }) => {
-          setUserInfo({ ...userInfo, email: target.value });
-        }}
-        type="email"
-      ></input>
-      <input
-        placeholder="hasło"
-        onChange={({ target }) => {
-          setUserInfo({ ...userInfo, password: target.value });
-        }}
-      ></input>
-      <button type="submit">submit</button>
-    </form>
+    <div className="grid place-items-center h-screen w-screen">
+      <div className="w-[70vw] h-[70vh] flex items-center justify-center bg-white rounded-[40px]  max-w-[950px] min-w-[800px]">
+        <div className="w-2/5 bg-[#2523A8] h-full opacity-30"></div>
+        <LoginForm></LoginForm>
+      </div>
+    </div>
   );
 }
 
