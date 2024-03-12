@@ -32,7 +32,6 @@ model Task {
 model User {
   id        Int               @id @default(autoincrement())
   name      String
-  surname   String
   email     String            @unique
   password  String
   boards    BoardUserRoles[]
