@@ -21,8 +21,7 @@ function LoginForm() {
     console.log(res);
     console.log(!res?.error);
     if (!res?.error) {
-      router.refresh();
-      router.replace("/dashboard");
+      await router.push("/dashboard");
       return;
     }
     MySwal.fire({
