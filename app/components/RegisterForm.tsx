@@ -1,3 +1,4 @@
+"use client";
 import React, { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";

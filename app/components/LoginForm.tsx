@@ -62,7 +62,8 @@ function LoginForm() {
         className="text-white bg-[#2523A8] opacity-30 rounded-lg w-2/3 h-10  text-sm px-2 mt-6"
       >
         Submit
-      </button>{" "}
+      </button>
+      <div onClick={() => router.push("/register")}>ASDASDASDADS</div>
     </form>
   );
 }
